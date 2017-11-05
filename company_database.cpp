@@ -13,11 +13,6 @@
 * Admin        Guest    
 *
 *
-* Tasks remaining:
-* Deciding the design of the delete function and implementing it.
-* Deciding the design of the search function and implementing it.
-* Testing this program.
-* Define a macro pushback function as pb
 */
 
 
@@ -70,7 +65,7 @@ class guest : public users
                     cout<<"Press (2) to search an existing record"<<endl;
                     cout<<"Press (3) to exit"<<endl;
                     cin>>choice;
-                    // system("cls");
+                    //system("clear");
     
                     switch(choice)
                     {
@@ -90,7 +85,7 @@ class guest : public users
                     cout<<"Press (2) to search an existing record"<<endl;
                     cout<<"Press (3) to exit"<<endl;
                     cin>>choice;
-                    // system("cls");
+                    //system("clear");
     
                     switch(choice)
                     {
@@ -111,6 +106,7 @@ class admin : public users
 {
     protected: int choice;
                string e;
+               string password;
 
     public: friend void add_record_institute();
             friend void delete_record_institute(string);
@@ -128,6 +124,9 @@ class admin : public users
 
             admin(char type)
             {
+                cout<<"Enter password"<<endl;
+                cin>>password;
+
                 if(type=='I')
                 {
                     cout<<"Press (1) to add a new record"<<endl;
@@ -307,8 +306,11 @@ class institute
 
 
 
-
-template<typename Out>
+/* 
+*makes a generic class which can be used to process 
+*any kind of data in the split function
+*/
+template<class Out>
 void split(const std::string &s, char delim, Out result)
 {
     std::stringstream ss(s);
@@ -332,7 +334,7 @@ void split(const std::string &s, std::vector<std::string> &elems,char delim)
 void users :: read_file_institute()
 {
     ifstream x("institute.csv");
-    char z[100]; // array
+    char z[100]; // array to extract a single line from the csv file
 
     while(x.getline(z,100)) // csv data of one record
     {
@@ -511,7 +513,11 @@ int main()
     {
         cout<<"To save data in institute.csv press `I`"<<endl;
         cout<<"To save data in company.csv press `C`"<<endl;
+        cout<<"To exit press any key"<<endl;
         cin>>class_choice;
+        if(class_choice!='I'&&class_choice!='C')
+            exit(0);
+
         cout<<"To login as admin press `A`"<<endl;
         cout<<"To login as a guest press 'G'"<<endl;
         cout<<"To exit press any key"<<endl;

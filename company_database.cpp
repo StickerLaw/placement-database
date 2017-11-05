@@ -28,48 +28,81 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 class company;
 class institute;
-
 std::vector<institute> v1;
-
+std::vector<company> v2;
 
 class users
 {
-    public: void add_record();
-            void delete_record(string);
-            void read_file();
-            void write_file();
-            void search_record(string);
-            void view_record();
+    public: virtual void add_record_institute();
+            virtual void delete_record_institute(string);
+            virtual void read_file_institute();
+            virtual void write_file_institute();
+            virtual void search_record_institute(string);
+            virtual void view_record_institute();
+            virtual void add_record_company();
+            virtual void delete_record_company(string);
+            virtual void read_file_company();
+            virtual void write_file_company();
+            virtual void search_record_company(string);
+            virtual void view_record_company();
             
             users(){}
-            virtual ~users() {}
 };
 
 class guest : public users
 {
     protected: int choice;
+               string e;
 
-    public: friend void view_record();
-            friend void search_record(string);
-            guest()
+    public: friend void view_record_institute();
+            friend void search_record_institute(string);
+            friend void view_record_company();
+            friend void search_record_company(string);
+            guest(char type)
             {
 
-                cout<<"Press (1) to view existing records"<<endl;
-                cout<<"Press (2) to search an existing record"<<endl;
-                cout<<"Press (3) to exit"<<endl;
-                cin>>choice;
-                // system("cls");
-
-                switch(choice)
+                if(type=='I')
                 {
-                    case 1: //view
-                            break;
-                    case 2: //search
-                            break;
-                    case 3: //exit
-                            break;
+                    cout<<"Press (1) to view existing records"<<endl;
+                    cout<<"Press (2) to search an existing record"<<endl;
+                    cout<<"Press (3) to exit"<<endl;
+                    cin>>choice;
+                    // system("cls");
+    
+                    switch(choice)
+                    {
+                        case 1: view_record_institute();
+                                break;
+    
+                        case 2: cin>>e;
+                                search_record_institute(e);
+                                break;
+                        case 3: //exit
+                                break;
+                    }
+                }
+                else
+                {
+                    cout<<"Press (1) to view existing records"<<endl;
+                    cout<<"Press (2) to search an existing record"<<endl;
+                    cout<<"Press (3) to exit"<<endl;
+                    cin>>choice;
+                    // system("cls");
+    
+                    switch(choice)
+                    {
+                        case 1: view_record_company();
+                                break;
+    
+                        case 2: cin>>e;
+                                search_record_company(e);
+                                break;
+                        case 3: //exit
+                                break;
+                    }
                 }
             }
 };
@@ -77,45 +110,83 @@ class guest : public users
 class admin : public users
 {
     protected: int choice;
-               char type;
                string e;
 
-    public: friend void add_record();
-            friend void delete_record(string);
-            friend void read_file();
-            friend void write_file();
-            friend void search_record(string);
-            friend void view_record();
+    public: friend void add_record_institute();
+            friend void delete_record_institute(string);
+            friend void read_file_institute();
+            friend void write_file_institute();
+            friend void search_record_institute(string);
+            friend void view_record_institute();
+            friend void add_record_company();
+            friend void delete_record_company(string);
+            friend void read_file_company();
+            friend void write_file_company();
+            friend void search_record_company(string);
+            friend void view_record_company();
             friend void split(const std::string &s, std::vector<std::string> &elems,char); 
 
-            admin()
+            admin(char type)
             {
-                cout<<"Press (1) to add a new record"<<endl;
-                cout<<"Press (2) to delete an existing record"<<endl;
-                cout<<"Press (3) to view existing records"<<endl;
-                cout<<"Press (4) to search an existing record"<<endl;
-                cout<<"Press (5) to exit"<<endl;
-                cin>>choice;
-                // system("cls");
-
-                switch(choice)
+                if(type=='I')
                 {
-                    case 1: add_record();
-                            //system("cls");
-                            break;
-                    case 2: cin>>e;
-                            search_record(e);
-                            break;
-                    
-                    case 3: view_record();
-                            break;
-                    case 4: cin>>e;
-                            delete_record(e);
-                            break;
-
-                    default: break;
+                    cout<<"Press (1) to add a new record"<<endl;
+                    cout<<"Press (2) to search an existing record"<<endl;
+                    cout<<"Press (3) to view existing records"<<endl;
+                    cout<<"Press (4) to delete an existing record"<<endl;
+                    cout<<"Press (5) to exit"<<endl;
+                    cin>>choice;
+                    // system("cls");
+    
+                    switch(choice)
+                    {
+                        case 1: add_record_institute();
+                                //system("cls");
+                                break;
+                        case 2: cin>>e;
+                                search_record_institute(e);
+                                break;
+                        
+                        case 3: view_record_institute();
+                                break;
+    
+                        case 4: cin>>e;
+                                delete_record_institute(e);
+                                break;
+    
+                        default: break;
+                    }
                 }
-            }
+                    else
+                    {
+                        cout<<"Press (1) to add a new record"<<endl;
+                        cout<<"Press (2) to search an existing record"<<endl;
+                        cout<<"Press (3) to view existing records"<<endl;
+                        cout<<"Press (4) to delete an existing record"<<endl;
+                        cout<<"Press (5) to exit"<<endl;
+                        cin>>choice;
+                        // system("cls");
+        
+                        switch(choice)
+                        {
+                            case 1: add_record_company();
+                                    //system("cls");
+                                    break;
+                            case 2: cin>>e;
+                                    search_record_company(e);
+                                    break;
+                            
+                            case 3: view_record_company();
+                                    break;
+        
+                            case 4: cin>>e;
+                                    delete_record_company(e);
+                                    break;
+        
+                            default: break;
+                        }
+                    }
+                }
 };
 
 
@@ -124,30 +195,56 @@ class company
 
   friend class institute;
 
-  public: string company_name, contact_no, salary, domain, head_office;
+  public: string institute_name, company_name, contact_no, salary, domain, head_office;
             
 
   public: void add()
-  		  {
-                cout<<"Add company name"<<endl;
-                cin>>company_name;
-                cout<<"Add contact number"<<endl;
-                cin>>contact_no;
-                cout<<"Add salary"<<endl;
-                cin>>contact_no;
-                cout<<"Add head office"<<endl;
-                cin>>contact_no;
-                cout<<"Add domains and technologies"<<endl;
-                cin>>contact_no;
-          }
-          
-          // delete search and view methods to be added later
-          // PRs are welcome
+          {
+              cout<<"Add institute name"<<endl;
+              cin>>institute_name;
+              cout<<"Add company name"<<endl;
+              cin>>company_name;
+              cout<<"Add contact number"<<endl;
+              cin>>contact_no;
+              cout<<"Add head_office"<<endl;
+              cin>>head_office;
+              cout<<"Add salary"<<endl;
+              cin>>salary;
+              cout<<"Add domains and technology"<<endl;
+              cin>>domain;
 
-          friend void read_file();
-          friend void write_file();
-          friend void search_record(string);
-          friend void view_record();
+           }
+
+          void show()
+          {
+              cout<<institute_name<<'\t'<<company_name<<'\t'
+              <<contact_no<<'\t'<<head_office<<'\t'<<salary<<'\t'<<domain<<endl;
+          }
+
+
+          void acceptData(vector<string> &v)
+          {
+              institute_name=v[0];
+              company_name=v[1];
+              contact_no=v[2];
+              head_office=v[3];
+              salary=v[4];
+              domain=v[5];
+
+          }
+
+          void write(ofstream &x)
+          {
+              x<<institute_name<<','<<company_name<<','<<contact_no<<','
+              <<head_office<<','<<salary<<','<<domain<<endl;                                   
+          }
+
+          friend void read_file_company();
+          friend void write_file_company();
+          friend void search_record_company(string);
+          friend void delete_record_company(string);
+          friend void add_record_company();
+          friend void view_record_company();
 }obc;
 
 
@@ -177,38 +274,33 @@ class institute
 
             void show()
             {
-                cout<<institute_name<<endl;
-                cout<<company_name<<endl;
-                cout<<contact_no<<endl;
-                cout<<head_office<<endl;
-                cout<<salary<<endl;
-                cout<<domain<<endl;
+                cout<<institute_name<<'\t'<<company_name<<'\t'
+                <<contact_no<<'\t'<<head_office<<'\t'<<salary<<'\t'<<domain<<endl;
             }
 
-            friend void add_record();
-            friend void delete_record(string);
-            friend void read_file();
-            friend void write_file();
-            friend void search_record(string);
-            friend void view_record();
-            
-
-void acceptData(vector<string> &v)
-{
-  institute_name=v[0]; //If you have more member variables, initialize them like this
-  company_name=v[1];
-  contact_no=v[2];
-  head_office=v[3];
-  salary=v[4];
-  domain=v[5];
+            void acceptData(vector<string> &v)
+            {
+                institute_name=v[0];
+                company_name=v[1];
+                contact_no=v[2];
+                head_office=v[3];
+                salary=v[4];
+                domain=v[5];
   
-}
+            }
 
-void write(ofstream &x)
-{
-    //cout<<"Inside write()";
-    x<<institute_name<<','<<company_name<<','<<contact_no<<','<<head_office<<','<<salary<<','<<domain<<endl;//If you have more variables, add them like this                                      
-}
+            void write(ofstream &x)
+            {
+                x<<institute_name<<','<<company_name<<','<<contact_no<<','
+                <<head_office<<','<<salary<<','<<domain<<endl;                                   
+            }
+
+            friend void read_file_company();
+            friend void write_file_company();
+            friend void search_record_company(string);
+            friend void delete_record_company(string);
+            friend void add_record_company();
+            friend void view_record_company();
 
 // a global object of the class created right outside
 }obi;
@@ -237,7 +329,7 @@ void split(const std::string &s, std::vector<std::string> &elems,char delim)
 
 
 
-void users :: read_file()
+void users :: read_file_institute()
 {
     ifstream x("institute.csv");
     char z[100]; // array
@@ -261,7 +353,7 @@ void users :: read_file()
 }
  
 
-void users :: write_file()
+void users :: write_file_institute()
 {
     ofstream x("institute.csv");
 
@@ -274,33 +366,117 @@ void users :: write_file()
 }
 
 
-void users :: add_record()
+void users :: add_record_institute()
 {
     obi.add();
     v1.push_back(obi);
-    write_file(); 
+    write_file_institute(); 
 }
 
 
 
-void users :: delete_record(string e)
+void users :: delete_record_institute(string e)
 {
     int c = 0;
     for(std::vector<institute>::iterator itr=v1.begin();itr!=v1.end();itr++, c++)
     {
-        if((*itr).company_name == e)
+        if((*itr).institute_name == e)
         {
             v1.erase(v1.begin()+c);
-            write_file();
+            write_file_institute();
             break;
         }
     }
 }
 
 
-void users :: search_record(string e)
+void users :: search_record_institute(string e)
 {
     for(std::vector<institute>::iterator itr=v1.begin();itr!=v1.end();itr++)
+    {
+        if((*itr).institute_name == e)
+        {
+            (*itr).show();
+            break;
+        }
+    }
+}
+
+
+void users :: view_record_institute()
+{
+    for(std::vector<institute>::iterator itr=v1.begin();itr!=v1.end();itr++)
+    {
+        (*itr).show();
+    }
+}
+
+
+
+void users :: read_file_company()
+{
+    ifstream x("company.csv");
+    char z[100]; // array
+
+    while(x.getline(z,100)) // csv data of one record
+    {
+        string s;
+
+        for(int i=0;z[i]!='\0';i++)
+            s.push_back(z[i]); // push back macro
+
+        std::vector<string> v;
+        split(s,v,',');                            
+        obc.acceptData(v);//this vector contains all the memnber variables of the class institute.
+        v2.push_back(obc);
+    }
+    
+    x.close();
+  
+// Read all the remaining files in the same manner. Inside ifstream, change File name. Define acceptData in other classes which you want to read from the file, and send this vector to initialize.
+}
+ 
+
+void users :: write_file_company()
+{
+    ofstream x("company.csv");
+
+    for(std::vector<company>::iterator itr=v2.begin();itr!=v2.end();itr++)
+    {
+        (*itr).write(x);
+    }
+
+    x.close();
+}
+
+
+void users :: add_record_company()
+{
+    obc.add();
+    v2.push_back(obc);
+    write_file_company(); 
+}
+
+
+
+void users :: delete_record_company(string e)
+{
+    int c = 0;
+    for(std::vector<company>::iterator itr=v2.begin();itr!=v2.end();itr++, c++)
+    {
+        if((*itr).company_name == e)
+        {
+            v2.erase(v2.begin()+c);
+            write_file_company();
+            break;
+        }
+    }
+}
+
+
+void users :: search_record_company(string e)
+{
+    for(std::vector<company>::iterator itr=v2.begin();itr!=v2.end();itr++)
     {
         if((*itr).company_name == e)
         {
@@ -311,37 +487,43 @@ void users :: search_record(string e)
 }
 
 
-void users :: view_record()
+void users :: view_record_company()
 {
-    for(std::vector<institute>::iterator itr=v1.begin();itr!=v1.end();itr++)
+    for(std::vector<company>::iterator itr=v2.begin();itr!=v2.end();itr++)
     {
         (*itr).show();
     }
 }
 
 
-
-/* functionality to be extended later
-** add a functionality to create new records in a loop
-*/
+// driver function to run the program
 int main()
 {
-    char user_type;
+    char choice;
+    char class_choice;
     users u;
-    cout<<"If you are an admin press 'A'"<<endl;
-    cout<<"If you are a guest press 'G'"<<endl;
-    cin>>user_type;
-    u.read_file();
-    u.write_file();
+    u.read_file_institute();
+    u.write_file_institute();
+    u.read_file_company();
+    u.write_file_company();
 
+    while(1)
+    {
+        cout<<"To save data in institute.csv press `I`"<<endl;
+        cout<<"To save data in company.csv press `C`"<<endl;
+        cin>>class_choice;
+        cout<<"To login as admin press `A`"<<endl;
+        cout<<"To login as a guest press 'G'"<<endl;
+        cout<<"To exit press any key"<<endl;
+        cin>>choice;
 
-    if(user_type=='A')
-        admin a;
-    else
-        guest g;
-
+        if(choice=='A')
+            admin a(class_choice);
+        else if(choice=='G')
+            guest g(class_choice);
+        else
+            exit(0);
+    }
+    
     return 0;
 }
-
-
-

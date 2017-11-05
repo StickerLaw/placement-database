@@ -16,13 +16,8 @@
 */
 
 
-#include <iostream>
-#include <vector>
-#include <stdlib.h>
-#include <string>
 #include <bits/stdc++.h>
 using namespace std;
-
 
 class company;
 class institute;
@@ -203,7 +198,7 @@ class company
               cin>>institute_name;
               cout<<"Add company name"<<endl;
               cin>>company_name;
-              cout<<"Add contact number"<<endl;
+              cout<<"Add contact number"<<endl; 
               cin>>contact_no;
               cout<<"Add head_office"<<endl;
               cin>>head_office;

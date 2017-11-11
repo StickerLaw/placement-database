@@ -1,0 +1,22 @@
+[cpp]
+# Patches may conflict with autopep8 so putting them in own section so they
+# will be executed sequentially; also we need the LineLengthBear to double
+# check the line length because PEP8Bear sometimes isn't able to correct the
+# linelength.
+bears = SpaceConsistencyBear, CPPCheckBear
+files = company_database.cpp
+language = C++
+preferred_quotation = "
+
+default_actions = *: ApplyPatchAction
+
+[DOCS]
+bears = SpaceConsistencyBear, LineLengthBear
+files = README.md
+
+default_actions = SpaceConsistencyBear: ApplyPatchAction 
+
+[commit]
+bears = GitCommitBear
+shortlog_trailing_period = False
+shortlog_regex = ([^:]*|[^:]+[^ ]: [A-Z0-9*].*)

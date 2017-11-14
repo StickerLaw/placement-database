@@ -215,16 +215,28 @@ class company
     public:
         void add()
         {
+            int i;
+
             cout<<"\n\nAdd institute name: ";
             cin>>institute_name;
             cout<<"Add company name: ";
             cin>>company_name;
             cout<<"Add contact number: ";
             cin>>contact_no;
+                if(isalpha(contact_no[i]))
+                {
+                    cout<<"Invlid input try again"<<endl;
+                    exit(0);
+                }
             cout<<"Add head_office: ";
             cin>>head_office;
             cout<<"Add salary: ";
             cin>>salary;
+            if(isalpha(salary[0]))
+            {
+                cout<<"Invlid input try again"<<endl;
+                exit(0);
+            }
             cout<<"Add domains and technology: ";
             cin>>domain;
         }
@@ -274,10 +286,20 @@ class institute
             cin>>company_name;
             cout<<"Add contact number: ";
             cin>>contact_no;
+            if(isalpha(contact_no[0]))
+            {
+                cout<<"Invlid input try again"<<endl;
+                exit(0);
+            }
             cout<<"Add head_office: ";
             cin>>head_office;
             cout<<"Add salary: ";
             cin>>salary;
+            if(isalpha(salary[0]))
+            {
+                cout<<"Invlid input try again"<<endl;
+                exit(0);
+            }
             cout<<"Add domains and technology: ";
             cin>>domain;
         }
